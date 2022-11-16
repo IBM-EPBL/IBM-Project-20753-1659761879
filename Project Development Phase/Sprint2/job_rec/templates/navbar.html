@@ -1,0 +1,37 @@
+ <!-- navbar -->
+ <nav class="navbar navbar-dark bg-dark navbar-expand-md text-light navbar-nav-scroll fixed-top py-4" id="nav">
+    <div class="container">
+        <a href="{% url 'home' %}"  class="navbar-brand"><span class="h1">Jobfindo</span></a>
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+            id="navbar-toggler" onclick="navButton()">
+            <i class="bi bi-caret-down-fill" id="toggle-button"></i>
+        </button>
+        <div class="navbar-collapse collapse" id="navbar">
+            <ul class="navbar-nav ms-auto">
+                {% if request.user.is_authenticated %}
+                <li class="nav-item"><a href="" class="nav-link text-light lead"><span id="nav-link">Dashboard</span></a></li>
+                <li class="nav-item"><a href="" class="nav-link text-light lead"><span
+                                id="nav-link">Account</span></a></li> 
+                <li class="nav-item"><a href="" class="nav-link text-light lead"><span
+                            id="nav-link">Contact</span></a></li>
+                {% else %}
+                <li class="nav-item"><a href="" class="nav-link text-light lead"><span id="nav-link">Login</span></a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- end navbar -->
+
+
+<script>
+navButton = () =>{
+    let button = document.getElementById('toggle-button').className
+    if(button == 'bi bi-caret-down-fill'){
+        document.getElementById('toggle-button').className = 'bi bi-caret-up-fill'
+    }else{
+        document.getElementById('toggle-button').className = 'bi bi-caret-down-fill'
+    }
+
+}
+</script>
