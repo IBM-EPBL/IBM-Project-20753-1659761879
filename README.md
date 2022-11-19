@@ -29,6 +29,4 @@ To develop an end-to-end web application capable of displaying the current job o
 ## Technical Architecture :
 ![Technical architecture diagram](https://lh3.googleusercontent.com/1OWTBsvpOXh0YVOalvRAGG8uDOBJea7NpyXg5hSSHb61IRRFHTY8txceIQfcIsc9b9coajOEraPoPIAVr5SOr0WFF0iQKVHnHOXk-wAn6XwNjuZFSsdGwreGV7Y10Q)
 
-## Project Demonstration Video:
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)]([https://youtu.be/vt5fpE0bzSY](https://flask-assignment.s3.jp-tok.cloud-object-storage.appdomain.cloud/Project%20Video.mp4))
 
