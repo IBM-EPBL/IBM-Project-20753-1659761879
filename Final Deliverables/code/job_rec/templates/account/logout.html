@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}<title>Log out</title>{% endblock %}
+
+{% block content %}
+<style>
+  .container button {
+    background-color: black;
+    box-shadow: none;
+    outline: rgb(138, 43, 226);
+    color: white
+  }
+
+  .container button:hover {
+    background-color: rgb(135, 7, 255);
+    box-shadow: none;
+    outline: rgb(138, 43, 226);
+    color: white
+  }
+</style>
+<section class="text-center align-items-center">
+  <div class="container">
+    <div class="row d-flex justify-content-center py-4">
+      <div class="col-lg-4">
+        <h1>Logout</h1>
+
+        <h5 class="py-2 mt-5">{% trans 'Are you sure you want to sign out?' %}</h5>
+    
+        <form method="post" action="{% url 'account_logout' %}">
+          {% csrf_token %}
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn">Log out</button>
+          </div>
+    
+        </form>
+      </div>
+    </div>
+    
+
+  </div>
+</section>
+
+
+{% endblock %}

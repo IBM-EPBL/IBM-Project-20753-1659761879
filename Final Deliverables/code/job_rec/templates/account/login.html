@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}<title>Login page</title>{% endblock %}
+
+{% block content %}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Capriola&display=swap');
+.container .title{
+  font-family: 'Capriola', sans-serif;
+  color: rgb(138,43,226);
+  
+}
+
+.container .row .col-lg-6 .card  .login .asteriskField,.container .row .col-lg-6 .card  .login  .requiredField{
+    display: none;
+}
+
+.container .row .col-lg-6 .card  .login #div_id_login input,.container .row .col-lg-6 .card  .login #div_id_password input{
+   background-color: rgb(244, 242, 242);
+
+}
+.container .row .col-lg-6 .card  .login #div_id_login input:focus, .container .row .col-lg-6 .card  .login #div_id_password input:focus{
+  outline: 1px solid rgb(138,43,226);
+  box-shadow: none;
+}
+
+.container .row .col-lg-6 .card .login button{
+  background-color: black;
+  box-shadow: none;
+  outline: rgb(138,43,226);
+  color:white
+}
+.container .row .col-lg-6 .card  .login button:hover{
+  background-color: rgb(135, 7, 255);
+  box-shadow: none;
+  outline: rgb(138,43,226);
+  color:white
+}
+.container .row .col-lg-6 .card  .login #div_id_remember input:focus{
+  box-shadow: none;
+  background-color: rgb(138,43,226);
+}
+.container .card-body{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+</style>
+<div class="container">
+  <h1 class="text-center title display-3 py-5 fw-bold">Job findo</h1>
+  <div class="row gap-5 d-flex justify-content-center my-5">
+    <div class="col-lg-5">
+    <img src="{% static 'images/work.png'%}" alt="" class="img-fluid my-5">
+    </div>
+    <div class="col-lg-6 py-1">
+      <div class="card py-2">
+        <div class="card-body">
+          <h1 class="card-title text-center">LOGIN</h1>
+         
+          <form class="login" method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            {{ form| crispy}}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            
+            <div class="d-grid gap-2">
+              <button class="primaryAction btn " type="submit">{% trans "Sign In" %}</button>
+            </div>
+            <p class="text-center my-4" ><a class="button secondaryAction" href="{% url 'account_reset_password' %}"  style="text-decoration: none;">Forgot Password?</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <p class="text-center">Not an member of JobFindo
+    <a href="{{ signup_url }}">sign up</a>
+  </p>
+</div>
+
+
+{% endblock %}
