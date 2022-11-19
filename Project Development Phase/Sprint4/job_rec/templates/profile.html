@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}<title>Login page</title>{% endblock %}
+
+{% block content %}
+<style>
+    .container .row .col-lg-5 .card .profile .asteriskField
+     {
+        display: none;
+    }
+
+    .container .row .col-lg-5 .card .profile input {
+        background-color: rgb(244, 242, 242);
+
+    }
+
+    .container .row .col-lg-5 .card .profile input:focus {
+        outline: 1px solid rgb(138, 43, 226);
+        box-shadow: none;
+    }
+
+    .container .row .col-lg-5 .card .profile button {
+        background-color: black;
+        box-shadow: none;
+        outline: rgb(138, 43, 226);
+        color: white
+    }
+
+    .container .row .col-lg-5 .card .profile button:hover {
+        background-color: rgb(135, 7, 255);
+        box-shadow: none;
+        outline: rgb(138, 43, 226);
+        color: white
+    }
+
+    .container .row .col-lg-5 .card .profile button:focus {
+        box-shadow: none;
+        background-color: rgb(138, 43, 226);
+    }
+
+    .container .card-body {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    }
+</style>
+{% include "navbar.html" %}
+<section class="align-items-center py-5">
+    <div class="container py-5">
+        <div class="row py-5">
+            <div class="col-lg-5 py-5">
+                <div class="card">
+                    <div class="card-body py-5">
+                        <img src="{% static 'images/work.png'%}" alt="" class="img-fluid my-5">
+                        <form method="POST" action='{% url "profile" request.user.id %}' class="profile">
+                            {% csrf_token %}
+                            {{form|crispy}}
+                            <div class="d-grid gap-2">
+                                <button type="submit" value="submit" class="btn btn-primary">submit</button>
+                            </div>
+                            
+                        </form>
+                      
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 py-4">
+                <h2>Job you have applied</h2>
+                {% for i in job_applied %}
+                <div class="card mb-2">
+                    <div class="card-body py-5">
+                        
+                        
+                        <p>Title: {{i.title}}</p>
+                        <p>location: {{i.location}}</p>
+                        <p>company name: {{i.company_name}}</p>
+
+                        
+                      
+                        
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
