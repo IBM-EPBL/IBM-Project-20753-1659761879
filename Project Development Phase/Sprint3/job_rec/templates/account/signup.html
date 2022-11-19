@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load i18n %}
+
+{% block content%}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Capriola&display=swap');
+
+  .container .title {
+    font-family: 'Capriola', sans-serif;
+    color: rgb(138, 43, 226);
+
+  }
+
+  .container .row .col-lg-6 .card .signup .asteriskField,
+  .container .row .col-lg-6 .card .signup .requiredField {
+    display: none;
+  }
+
+  .container .row .col-lg-6 .card .signup #div_id_email input,
+  /* .container .row .col-lg-6 .card .signup #div_id_username input, */
+  .container .row .col-lg-6 .card .signup #div_id_password1 input,
+  .container .row .col-lg-6 .card .signup #div_id_password2 input {
+    background-color: rgb(244, 242, 242);
+
+  }
+
+  .container .row .col-lg-6 .card .signup #div_id_email input:focus,
+  /* .container .row .col-lg-6 .card .signup #div_id_username input:focus, */
+  .container .row .col-lg-6 .card .signup #div_id_password1 input:focus,
+  .container .row .col-lg-6 .card .signup #div_id_password2 input:focus {
+    outline: 1px solid rgb(138, 43, 226);
+    box-shadow: none;
+  }
+
+  .container .row .col-lg-6 .card .signup button {
+    background-color: black;
+    box-shadow: none;
+    outline: rgb(138, 43, 226);
+    color: white
+  }
+
+  .container .row .col-lg-6 .card .signup button:hover {
+    background-color: rgb(135, 7, 255);
+    box-shadow: none;
+    outline: rgb(138, 43, 226);
+    color: white
+  }
+
+
+  .container .card-body {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  }
+</style>
+<div class="container">
+  <div class="row  gap-5 d-flex justify-content-center">
+    <h1 class="text-center title display-3 py-5 fw-bold">Job findo</h1>
+    <div class="col">
+      <img src="{% static 'images/work2.png'%}" alt="" class="img-fluid my-5">
+    </div>
+    <div class="col-lg-6">
+      <div class="card py-2">
+        <div class="card-body">
+          <h1 class="card-title text-center">SIGN UP</h1>
+          <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+            {% csrf_token %}
+            {{ form| crispy}}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+
+            <div class="d-grid gap-2">
+              <button class="primaryAction btn " type="submit">Sign Up</button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <p class="text-center">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}" style="text-decoration: none ;">sign in</a>.{% endblocktrans %}</p>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load i18n %}
+
+
+{% block title %}<title>Login page</title>{% endblock %}
+
+{% block content %}
+<style>
+    .container .row .col-lg-9 .card .job_form .asteriskField {
+        display: none;
+    }
+
+    .container .row .col-lg-9 .card .job_form input {
+        background-color: rgb(244, 242, 242);
+
+    }
+
+    .container .row .col-lg-9 .card .job_form input:focus {
+        outline: 1px solid rgb(138, 43, 226);
+        box-shadow: none;
+    }
+
+    .container .row .col-lg-9 .card .job_form button {
+        background-color: black;
+        box-shadow: none;
+        outline: rgb(138, 43, 226);
+        color: white
+    }
+
+    .container .row .col-lg-9 .card .job_form button:hover {
+        background-color: rgb(135, 7, 255);
+        box-shadow: none;
+        outline: rgb(138, 43, 226);
+        color: white
+    }
+
+    .container .row .col-lg-9 .card .job_form button:focus {
+        box-shadow: none;
+        background-color: rgb(138, 43, 226);
+    }
+
+    .container .card-body {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    }
+</style>
+{% include "navbar.html" %}
+<section class="align-items-center py-5">
+    <div class="container py-5 ">
+        <div class="row py-5 d-flex justify-content-center">
+           <h1 class="text-center py-2" >Jobs you can apply</h1>
+            <div class="col-lg-9 py-5">
+                {% if job_list %}
+                {% for i in job_list %}
+                <div class="card mb-5">
+                    <div class="card-body py-2">
+                        <form action="{% url 'home'  %}" class="job_form" method="POST">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Company name</label>
+                                <input type="text" class="form-control" value='{{ i.0 }}' name="company_name" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Title</label>
+                                <input type="text" class="form-control" value='{{ i.1 }}' name="title"readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-check-label" for="exampleCheck1">Location</label>
+                                <input type="text" class="form-control" value='{{ i.2 }}' name="location" readonly>
+
+                            </div>
+
+
+
+
+                            <div class="d-grid py-2">
+                                <button type="submit" value="submit" class="btn">submit</button>
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif%}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
